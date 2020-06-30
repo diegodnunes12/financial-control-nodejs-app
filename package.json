@@ -1,0 +1,40 @@
+{
+  "name": "app-gestao-financeira",
+  "version": "1.0.0",
+  "description": "App para controle financeiro pessoal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegodnunes12/financial-control-nodejs-app.git"
+  },
+  "keywords": [
+    "app",
+    "controle",
+    "financeiro",
+    "controle",
+    "de",
+    "gastos",
+    "gestão",
+    "de",
+    "entrada",
+    "e",
+    "saídas",
+    "de",
+    "ativo",
+    "gestão",
+    "financeira"
+  ],
+  "author": "Diego Nunes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diegodnunes12/financial-control-nodejs-app/issues"
+  },
+  "homepage": "https://github.com/diegodnunes12/financial-control-nodejs-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}
