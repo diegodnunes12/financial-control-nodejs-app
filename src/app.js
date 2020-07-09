@@ -28,9 +28,9 @@ app.get('/teste', (req, res) => {
     res.render('teste')
 })
 
-app.post('/game', function (req, res) {
+app.post('/addOrder', function (req, res) {
     console.log(req.body.name)
-    res.render('teste', { name: req.body.name });
+    res.render('index', { name: req.body.name });
 });
 
 //const port = process.env.port || 3000
