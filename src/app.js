@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
-
+const request = require('request')
 const bodyParser = require('body-parser');
 
 
@@ -29,6 +29,21 @@ app.get('/teste', (req, res) => {
 })
 
 app.post('/addOrder', function (req, res) {
+    
+    var options = {
+        'method': 'POST',
+        'url': 'http://localhost:3000/orders',
+        'headers': {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue":false,"settled":false,"category_id":"5effb2b80b241e1830fa098e"})
+      
+      };
+      request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+      });
+
     console.log(req.body.name)
     res.render('index', { name: req.body.name });
 });

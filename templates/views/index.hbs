@@ -31,15 +31,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <button id="newOrder" class="btn btn-primary"><img src="images/add.svg"> novo</button>
+            <div class="col-12 mb-3">
+                <button id="newOrder" class="btn btn-primary font-weight-bold"><img src="images/add.svg" class="mr-2 img-button">NOVO</button>
             </div>
-            <div class="col-12">
-                <form action="addOrder" method="post">
+            <div id="div-form" class="col-12 d-none">
+                <form id="form-order" action="addOrder" method="post">
                     <div class="form-group">
-                        <label for="date">Tipo</label>
+                        <label for="revenue">Tipo</label>
                         <select class="form-control" id="revenue" name="revenue">
-                            <option></option>
+                            <option disabled selected></option>
                             <option value="true">Entrada</option>
                             <option value="false">Saída</option>
                         </select>

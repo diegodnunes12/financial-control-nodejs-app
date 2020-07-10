@@ -6,6 +6,18 @@
 **************************************/
 
 form{
-    border: solid 3px #c00;
+    border: solid 3px #888;
     padding: 15px;
+}
+
+form.revenue{
+    border: solid 3px #1e7e34;
+}
+
+form.expense{
+    border: solid 3px #bd2130;
+}
+
+.img-button{
+    width: 32px;
 }
