@@ -21,6 +21,25 @@ app.use(express.static(pathPublic))
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('', (req, res) => {
+
+  var options = {
+    'method': 'GET',
+    'url': 'http://localhost:3000/categories',
+    'headers': {
+    }
+  };
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+
+    let categories = JSON.parse(response.body)
+
+    categories.forEach(element => {
+      console.log(element.name);
+    });
+
+    
+  });
+
     res.render('index')
 })
 

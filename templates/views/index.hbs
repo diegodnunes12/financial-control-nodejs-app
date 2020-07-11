@@ -56,7 +56,13 @@
                         <label for="value">Valor</label>
                         <input type="number" class="form-control" id="value" name="value">
                     </div>
-
+                    <div class="form-group">
+                        <label for="category_id">Categoria</label>
+                        <select class="form-control" id="category_id" name="category_id">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    {{optionsCategories}}
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="settled" name="settled">
                         <label class="custom-control-label" for="settled">Lançamento pago</label>

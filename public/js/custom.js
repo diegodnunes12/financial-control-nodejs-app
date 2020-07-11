@@ -1,5 +1,37 @@
 // Apresenta o formulário
-$('#newOrder').click( () => $('#div-form').removeClass( "d-none" ) )
+$('#newOrder').click( () => {
+    $('#div-form').removeClass( "d-none" ) 
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+      
+    fetch("http://localhost:3000/categories", requestOptions)
+    .then(response => response.text())
+    .then(
+        (result) => {
+
+            let select = document.getElementById('category_id')
+
+            let categories = JSON.parse(result)
+            categories.forEach(category => {                
+                let option = document.createElement("option")
+                option.text = category.name
+                option.value = category._id
+                select.add(option);
+
+
+                console.log(category);
+            });
+
+
+        }
+        //result => console.log(typeof result)
+        //let categories = JSON.parse(response.body)
+    )
+    .catch(error => console.log('error', error));
+})
 
 // Alterando a borda do formulário de lançamentos
 $( "#revenue" ).change( () => {
