@@ -43,6 +43,29 @@ app.get('', (req, res) => {
     res.render('index')
 })
 
+app.get('/categories', (req, res) => {
+
+  var options = {
+    'method': 'GET',
+    'url': 'http://localhost:3000/categories',
+    'headers': {
+    }
+  };
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+
+    let categories = JSON.parse(response.body)
+
+    categories.forEach(element => {
+      console.log(element.name);
+    });
+
+    
+  });
+
+    res.render('category')
+})
+
 app.get('/teste', (req, res) => {
     res.render('teste')
 })
