@@ -50,24 +50,21 @@ app.get('/categories', (req, res) => {
     'url': 'http://localhost:3000/categories',
     'headers': {
     }
-  };
-  request(options, function (error, response) {
-    if (error) throw new Error(error);
+  }
+
+  request(options, (error, response) => {
+    if (error) throw new Error(error)
 
     let categories = JSON.parse(response.body)
 
-    categories.forEach(element => {
-      console.log(element.name);
-    });
-
+    /*categories.forEach(element => {
+      console.log(element.name);      
+    }); */ 
     
-  });
-
-    res.render('category')
-})
-
-app.get('/teste', (req, res) => {
-    res.render('teste')
+    res.render('category', {
+      categories: categories
+    })
+  })  
 })
 
 app.post('/addOrder', function (req, res) {
