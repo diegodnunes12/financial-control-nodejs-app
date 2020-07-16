@@ -56,15 +56,45 @@ app.get('/categories', (req, res) => {
     if (error) throw new Error(error)
 
     let categories = JSON.parse(response.body)
-
-    /*categories.forEach(element => {
-      console.log(element.name);      
-    }); */ 
     
     res.render('category', {
       categories: categories
     })
   })  
+})
+
+app.post('/categories', function (req, res) {
+    
+  var options = {
+      'method': 'POST',
+      'url': 'http://localhost:3000/categories',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"name": "" + req.body.name + ""})
+    
+    };
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+    });
+
+    var options1 = {
+      'method': 'GET',
+      'url': 'http://localhost:3000/categories',
+      'headers': {
+      }
+    }
+  
+    request(options1, (error1, response1) => {
+      if (error1) throw new Error(error1)
+  
+      let categories1 = JSON.parse(response1.body)
+      
+      res.render('category', {
+        categories: categories1
+      })
+    })
+    //res.render('category')
 })
 
 app.post('/addOrder', function (req, res) {
@@ -86,6 +116,8 @@ app.post('/addOrder', function (req, res) {
     console.log(req.body.name)
     res.render('index', { name: req.body.name });
 });
+
+
 
 //const port = process.env.port || 3000
 

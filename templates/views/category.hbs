@@ -2,16 +2,14 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-12 mb-3">
-                <button id="newOrder" class="btn btn-primary font-weight-bold"><img src="images/add.svg" class="mr-2 img-button">NOVO</button>
-            </div>
-            <div id="div-form" class="col-12 d-none">
-                <form id="form-order" action="addOrder" method="post">                    
+            <div id="div-form" class="col-12">
+                <form id="form-order" action="categories" method="post">                    
                     <div class="form-group">
                         <label for="name">Descrição</label>
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    {{status}}
                 </form>
             </div>
             <div class="col-12">
