@@ -9,7 +9,6 @@
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    {{status}}
                 </form>
             </div>
             <div class="col-12">
@@ -26,8 +25,15 @@
                             {{#each categories}}
                                 <tr>
                                     <td>{{this.name}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                       
+                                    </td>
+                                    <td>
+                                        <form action="categories" method="DELETE">
+                                            <input type="hidden" name="id" value="{{this._id}}">
+                                            <input type="submit" value="X"/>
+                                        </form>
+                                    </td>
                                 </tr>
                             {{/each}}
                         </tbody>
