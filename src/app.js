@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('', (req, res) => {
-
+  
   var options = {
     'method': 'GET',
     'url': 'http://localhost:3000/categories',
@@ -45,7 +45,6 @@ app.get('', (req, res) => {
 })
 
 app.get('/categories', (req, res) => {
-
   var options = {
     'method': 'GET',
     'url': 'http://localhost:3000/categories',
@@ -77,29 +76,24 @@ app.post('/categories', function (req, res) {
     };
     request(options, function (error, response) {
       if (error) throw new Error(error);
-    });
-
-    var options1 = {
-      'method': 'GET',
-      'url': 'http://localhost:3000/categories',
-      'headers': {
-      }
-    }
-  
-    request(options1, (error1, response1) => {
-      if (error1) throw new Error(error1)
-  
-      let categories1 = JSON.parse(response1.body)
-      
-      res.render('category', {
-        categories: categories1
-      })
     })
-    //res.render('category')
+
+    res.redirect('/categories')
 })
 
-app.post('/teste', function (req, res) {
-  res.send('tsete')
+app.get('/delete-category', (req, res, next) => {
+  let options = {
+    'method': 'DELETE',
+    'url': `http://localhost:3000/categories/${req.query.id}`,
+    'headers': {
+    }
+  };
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+  })
+
+  res.redirect('/categories')
+  
 })
 
 app.post('/addOrder', function (req, res) {
@@ -117,8 +111,6 @@ app.post('/addOrder', function (req, res) {
         if (error) throw new Error(error);
         console.log(response.body);
       });
-
-    console.log(req.body.name)
     res.render('index', { name: req.body.name });
 });
 
