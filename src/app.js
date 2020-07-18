@@ -98,8 +98,8 @@ app.post('/categories', function (req, res) {
     //res.render('category')
 })
 
-app.delete('/categories', function (req, res) {
-  console.log(req.body.id);
+app.post('/teste', function (req, res) {
+  res.send('tsete')
 })
 
 app.post('/addOrder', function (req, res) {
