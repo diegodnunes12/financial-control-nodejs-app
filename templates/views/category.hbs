@@ -2,13 +2,13 @@
 <section>
     <div class="container">
         <div class="row">
-            <div id="div-form" class="col-12">
-                
-            </div>
-            <div class="col-12">
+            <div class="col-12 mt-2 mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
-                    <img src="images/add.svg" class="mr-2 img-button">NOVO
+                    <img src="images/add.svg" class="mr-2 ml-2 img-button">
                 </button>
+                <a href="/" class="btn btn-secondary float-right">
+                    <img src="images/go-back.svg" class="mr-2 ml-2 img-button">
+                </a>
             </div>
             <div class="col-12">
                 <div class="table-responsive-sm">
@@ -23,13 +23,15 @@
                         <tbody>
                             {{#each categories}}
                                 <tr>
-                                    <td>{{this.name}}</td>
+                                    <td class="pt-10">{{this.name}}</td>
                                     <td>
-                                       
+                                       <button class="btn btn-info" onclick="editCategory('{{this._id}}', '{{this.name}}')">
+                                            <img src="images/edit.svg">
+                                        </button>
                                     </td>
                                     <td>
                                         <button id="{{this._id}}" class="btn btn-danger" onclick="removeCategory('{{this._id}}', '{{this.name}}')">
-                                            <img src="images/trash.png">
+                                            <img src="images/delete.svg" height="24">
                                         </button>
                                     </td>
                                 </tr>
@@ -42,16 +44,17 @@
     </div>
 </section>
 
+{{!-- Add modal --}}
 <div class="modal fade" id="addCategory" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCategoryLabel">Categoria</h5>
+        <h5 class="modal-title" id="addCategoryLabel">Adicionar Categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="categories" method="post"> 
+      <form action="add-category" method="post"> 
         <div class="modal-body">                           
             <div class="form-group">
                 <label for="name">Descrição</label>
@@ -67,6 +70,34 @@
   </div>
 </div>
 
+{{!-- Edit modal --}}
+<div class="modal fade" id="editCategory" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="editCategoryLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCategoryLabel">Editar Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="update-category" method="post"> 
+        <div class="modal-body">                           
+            <div class="form-group">
+                <label for="name">Descrição</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <input type="hidden" name="id" id="editId" value="">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{!-- Confirm remove modal --}}
 <div class="modal fade" id="removeCategory" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="removeCategoryLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -82,7 +113,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancelar</button>
             <form action="/delete-category" method="get">
-                <input type="hidden" name="id" id="categoryId" value="">
+                <input type="hidden" name="id" id="removeId" value="">
                 <input type="submit" class="btn btn-danger" value="Remover">
             </form>
         </div>

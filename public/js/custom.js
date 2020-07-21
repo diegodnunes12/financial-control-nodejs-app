@@ -47,6 +47,12 @@ $( "#revenue" ).change( () => {
 
 function removeCategory(id, name){
     $('#categoryName').text(name)
-    $('#categoryId').val(id)
+    $('#removeId').val(id)
     $("#removeCategory").modal()
+}
+
+function editCategory(id, name){
+    $('input#name').val(name)
+    $('#editId').val(id)
+    $("#editCategory").modal()
 }

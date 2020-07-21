@@ -63,8 +63,8 @@ app.get('/categories', (req, res) => {
   })  
 })
 
-app.post('/categories', function (req, res) {
-    
+app.post('/add-category', function (req, res) {
+
   var options = {
       'method': 'POST',
       'url': 'http://localhost:3000/categories',
@@ -75,13 +75,31 @@ app.post('/categories', function (req, res) {
     
     };
     request(options, function (error, response) {
-      if (error) throw new Error(error);
-    })
+      if (error) throw new Error(error)
 
-    res.redirect('/categories')
+      res.redirect('/categories')
+    })    
 })
 
-app.get('/delete-category', (req, res, next) => {
+app.post('/update-category', function (req, res) {
+  var options = {
+    'method': 'PATCH',
+    'url': `http://localhost:3000/categories/${req.body.id}`,
+    'headers': {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"name":"" + req.body.name + ""})  
+  }
+
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+
+    res.redirect('/categories')
+  })  
+})
+
+app.get('/delete-category', (req, res) => {
   let options = {
     'method': 'DELETE',
     'url': `http://localhost:3000/categories/${req.query.id}`,
@@ -90,10 +108,9 @@ app.get('/delete-category', (req, res, next) => {
   };
   request(options, function (error, response) {
     if (error) throw new Error(error);
-  })
 
-  res.redirect('/categories')
-  
+    res.redirect('/categories')
+  })  
 })
 
 app.post('/addOrder', function (req, res) {
@@ -106,13 +123,15 @@ app.post('/addOrder', function (req, res) {
         },
         body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue":false,"settled":false,"category_id":"5effb2b80b241e1830fa098e"})
       
-      };
+      }
       request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-      });
-    res.render('index', { name: req.body.name });
-});
+        if (error) throw new Error(error)
+        console.log(response.body)
+
+        
+      })
+      res.render('index', { name: req.body.name });
+})
 
 
 
