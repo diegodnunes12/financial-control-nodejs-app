@@ -5,19 +5,23 @@
 **
 **************************************/
 
-form{
+#form-order{
     border: solid 3px #888;
     padding: 15px;
 }
 
-form.revenue{
+#form-order.revenue{
     border: solid 3px #1e7e34;
 }
 
-form.expense{
+#form-order.expense{
     border: solid 3px #bd2130;
 }
 
 .img-button{
     width: 32px;
+}
+
+#nomeCategoria{
+    font-weight: 600;
 }

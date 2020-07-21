@@ -44,3 +44,9 @@ $( "#revenue" ).change( () => {
         $('#form-order').addClass( "expense" )
     }
 })
+
+function removeCategory(id, name){
+    $('#categoryName').text(name)
+    $('#categoryId').val(id)
+    $("#removeCategory").modal()
+}
