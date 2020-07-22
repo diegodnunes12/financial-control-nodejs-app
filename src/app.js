@@ -25,25 +25,45 @@ app.get('', (req, res) => {
   
   var options = {
     'method': 'GET',
-    'url': 'http://localhost:3000/categories',
+    'url': 'http://localhost:3000/orders',
     'headers': {
     }
-  };
+  }
+
   request(options, function (error, response) {
     if (error) throw new Error(error);
 
-    let categories = JSON.parse(response.body)
+    let orders = JSON.parse(response.body)
 
-    categories.forEach(element => {
-      console.log(element.name);
-    });
-
-    
-  });
-
-    res.render('index')
+    res.render('index', {
+      orders: orders
+    })
+  })
+  
 })
 
+app.post('/addOrder', function (req, res) {
+    
+  var options = {
+      'method': 'POST',
+      'url': 'http://localhost:3000/orders',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue":false,"settled":false,"category_id":"5effb2b80b241e1830fa098e"})
+    
+    }
+    request(options, function (error, response) {
+      if (error) throw new Error(error)
+      console.log(response.body)
+
+      
+    })
+    res.render('index', { name: req.body.name });
+})
+
+
+/* Get all categories */
 app.get('/categories', (req, res) => {
   var options = {
     'method': 'GET',
@@ -63,6 +83,7 @@ app.get('/categories', (req, res) => {
   })  
 })
 
+/* Add a new category */
 app.post('/add-category', function (req, res) {
 
   var options = {
@@ -81,6 +102,7 @@ app.post('/add-category', function (req, res) {
     })    
 })
 
+/* Update a category */
 app.post('/update-category', function (req, res) {
   var options = {
     'method': 'PATCH',
@@ -99,6 +121,7 @@ app.post('/update-category', function (req, res) {
   })  
 })
 
+/* Delete a category */
 app.get('/delete-category', (req, res) => {
   let options = {
     'method': 'DELETE',
@@ -112,28 +135,6 @@ app.get('/delete-category', (req, res) => {
     res.redirect('/categories')
   })  
 })
-
-app.post('/addOrder', function (req, res) {
-    
-    var options = {
-        'method': 'POST',
-        'url': 'http://localhost:3000/orders',
-        'headers': {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue":false,"settled":false,"category_id":"5effb2b80b241e1830fa098e"})
-      
-      }
-      request(options, function (error, response) {
-        if (error) throw new Error(error)
-        console.log(response.body)
-
-        
-      })
-      res.render('index', { name: req.body.name });
-})
-
-
 
 //const port = process.env.port || 3000
 

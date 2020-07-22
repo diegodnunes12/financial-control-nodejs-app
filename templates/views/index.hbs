@@ -89,7 +89,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            {{#each orders}}
+                                <tr>
+                                    <td class="pt-10">{{this.name}}</td>
+                                    <td>
+                                       <button class="btn btn-info" onclick="editCategory('{{this._id}}', '{{this.name}}')">
+                                            <img src="images/edit.svg">
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="{{this._id}}" class="btn btn-danger" onclick="removeCategory('{{this._id}}', '{{this.name}}')">
+                                            <img src="images/delete.svg" height="24">
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
