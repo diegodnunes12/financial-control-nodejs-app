@@ -1,36 +1,35 @@
 // Apresenta o formulário
 $('#newOrder').click( () => {
-    $('#div-form').removeClass( "d-none" ) 
 
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
-      
-    fetch("http://localhost:3000/categories", requestOptions)
-    .then(response => response.text())
-    .then(
-        (result) => {
+    let qtdOptions = $('#category_id option')
 
-            let select = document.getElementById('category_id')
+    if(qtdOptions.length <= 1){
 
-            let categories = JSON.parse(result)
-            categories.forEach(category => {                
-                let option = document.createElement("option")
-                option.text = category.name
-                option.value = category._id
-                select.add(option);
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        fetch("http://localhost:3000/categories", requestOptions)
+        .then(response => response.text())
+        .then(
+            (result) => {
 
+                let select = document.getElementById('category_id')
 
-                console.log(category);
-            });
+                let categories = JSON.parse(result)
+                categories.forEach(category => {                
+                    let option = document.createElement("option")
+                    option.text = category.name
+                    option.value = category._id
+                    select.add(option)
+                })
+            }
+        )
+        .catch(error => console.log('error', error))
+    }
 
-
-        }
-        //result => console.log(typeof result)
-        //let categories = JSON.parse(response.body)
-    )
-    .catch(error => console.log('error', error));
+    $("#addOrder").modal()
 })
 
 // Alterando a borda do formulário de lançamentos

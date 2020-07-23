@@ -42,7 +42,19 @@ app.get('', (req, res) => {
   
 })
 
-app.post('/addOrder', function (req, res) {
+app.post('/add-order', function (req, res) {
+
+  //console.log(req.body.revenue)
+
+  let settled = false
+  if(req.body.settled){
+    settled = true
+  }
+
+  let revenue = false
+  if(req.body.revenue != null && req.body.revenue != "" && req.body.revenue != false){
+    revenue = true
+  }
     
   var options = {
       'method': 'POST',
@@ -50,16 +62,14 @@ app.post('/addOrder', function (req, res) {
       'headers': {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue":false,"settled":false,"category_id":"5effb2b80b241e1830fa098e"})
-    
+      body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue": + revenue,"settled": + settled,"category_id":"" + req.body.category_id + ""})
     }
+    
     request(options, function (error, response) {
-      if (error) throw new Error(error)
-      console.log(response.body)
-
-      
-    })
-    res.render('index', { name: req.body.name });
+      if (error) throw new Error(error) 
+      //console.log(response)
+      res.redirect('/')
+    })    
 })
 
 /* Delete a order */
@@ -69,7 +79,7 @@ app.get('/delete-order', (req, res) => {
     'url': `http://localhost:3000/orders/${req.query.id}`,
     'headers': {
     }
-  };
+  }
   request(options, function (error, response) {
     if (error) throw new Error(error);
 
