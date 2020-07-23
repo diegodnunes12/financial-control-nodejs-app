@@ -74,7 +74,7 @@
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
-            <div>
+            <div class="col-12">
                 <div class="table-responsive-sm">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -91,14 +91,20 @@
                         <tbody>
                             {{#each orders}}
                                 <tr>
-                                    <td class="pt-10">{{this.name}}</td>
+                                    <td class="pt-10">
+                                       <img src="/images/down.svg"> 
+                                    </td>
+                                    <td class="pt-10">{{this.date}}</td>
+                                    <td class="pt-10">{{this.description}}</td>
+                                    <td class="pt-10">{{this.value}}</td>
+                                    <td class="pt-10">{{this.value}}</td>
                                     <td>
                                        <button class="btn btn-info" onclick="editCategory('{{this._id}}', '{{this.name}}')">
                                             <img src="images/edit.svg">
                                         </button>
                                     </td>
                                     <td>
-                                        <button id="{{this._id}}" class="btn btn-danger" onclick="removeCategory('{{this._id}}', '{{this.name}}')">
+                                        <button id="{{this._id}}" class="btn btn-danger" onclick="removeOrder('{{this._id}}', '{{this.name}}')">
                                             <img src="images/delete.svg" height="24">
                                         </button>
                                     </td>
@@ -111,4 +117,29 @@
         </div>
     </div>
 </section>
+
+{{!-- Confirm remove modal --}}
+<div class="modal fade" id="removeOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="removeOrderLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="removeOrderLabel">Remover Lançamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">                           
+            <p>Você deseja realmente remover o lançamento: <strong><span id="orderName"></span></strong>?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancelar</button>
+            <form action="/delete-order" method="get">
+                <input type="hidden" name="id" id="removeId" value="">
+                <input type="submit" class="btn btn-danger" value="Remover">
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
 {{> footer}}

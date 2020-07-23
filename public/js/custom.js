@@ -56,3 +56,9 @@ function editCategory(id, name){
     $('#editId').val(id)
     $("#editCategory").modal()
 }
+
+function removeOrder(id, name){
+    $('#orderName').text(name)
+    $('#removeId').val(id)
+    $("#removeOrder").modal()
+}

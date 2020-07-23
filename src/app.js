@@ -62,6 +62,20 @@ app.post('/addOrder', function (req, res) {
     res.render('index', { name: req.body.name });
 })
 
+/* Delete a order */
+app.get('/delete-order', (req, res) => {
+  let options = {
+    'method': 'DELETE',
+    'url': `http://localhost:3000/orders/${req.query.id}`,
+    'headers': {
+    }
+  };
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+
+    res.redirect('/')
+  })  
+})
 
 /* Get all categories */
 app.get('/categories', (req, res) => {
