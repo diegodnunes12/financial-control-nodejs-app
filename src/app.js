@@ -35,6 +35,11 @@ app.get('', (req, res) => {
 
     let orders = JSON.parse(response.body)
 
+    orders.forEach(element => {
+      let dateOrder = new Date(element.date)
+      element.date = formatDate(dateOrder)
+    })
+
     res.render('index', {
       orders: orders
     })
@@ -43,8 +48,6 @@ app.get('', (req, res) => {
 })
 
 app.post('/add-order', function (req, res) {
-
-  //console.log(req.body.revenue)
 
   let settled = false
   if(req.body.settled){
@@ -159,6 +162,20 @@ app.get('/delete-category', (req, res) => {
     res.redirect('/categories')
   })  
 })
+
+
+function formatDate(date){
+  let day = twoDigitsFormat(date.getDate())
+  let month = twoDigitsFormat(date.getMonth() + 1)
+  let year = date.getFullYear()
+
+  return (`${day}/${month}/${year}`)  
+}
+
+// Exige que todos os dados da data e hora tenham dois digítos
+function twoDigitsFormat(date){
+  return ("0" + (date)).slice(-2)
+}
 
 //const port = process.env.port || 3000
 
