@@ -38,6 +38,8 @@ app.get('', (req, res) => {
     orders.forEach(element => {
       let dateOrder = new Date(element.date)
       element.date = formatDate(dateOrder)
+      //let decimalValue = parseFloat(element.value.$numberDecimal)
+      //element.value = decimalValue.toFixed(2).toLocaleString('pt-br')
     })
 
     res.render('index', {
@@ -79,7 +81,7 @@ app.post('/add-order', function (req, res) {
 app.get('/delete-order', (req, res) => {
   let options = {
     'method': 'DELETE',
-    'url': `http://localhost:3000/orders/${req.query.id}`,
+    'url': `http://localhost:3000/orders/${req.qeury.id}`,
     'headers': {
     }
   }
