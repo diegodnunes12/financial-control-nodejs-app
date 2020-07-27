@@ -34,16 +34,28 @@ app.get('', (req, res) => {
     if (error) throw new Error(error);
 
     let orders = JSON.parse(response.body)
+    let income = 0
+    let outlay = 0
+    let balance = 0
 
     orders.forEach(element => {
       let dateOrder = new Date(element.date)
       element.date = formatDate(dateOrder)
-      //let decimalValue = parseFloat(element.value.$numberDecimal)
-      //element.value = decimalValue.toFixed(2).toLocaleString('pt-br')
+      
+      if(element.revenue){
+        income += parseFloat(element.value.$numberDecimal)
+      }else{
+        outlay += parseFloat(element.value.$numberDecimal)
+      }
     })
 
+    balance = income - outlay
+
     res.render('index', {
-      orders: orders
+      orders: orders,
+      balance: balance,
+      income: income,
+      outlay: outlay
     })
   })
   
@@ -51,15 +63,8 @@ app.get('', (req, res) => {
 
 app.post('/add-order', function (req, res) {
 
-  let settled = false
-  if(req.body.settled){
-    settled = true
-  }
-
-  let revenue = false
-  if(req.body.revenue != null && req.body.revenue != "" && req.body.revenue != false){
-    revenue = true
-  }
+  let settled = (req.body.settled == 'true')
+  let revenue = (req.body.revenue == 'true')
     
   var options = {
       'method': 'POST',
@@ -81,7 +86,7 @@ app.post('/add-order', function (req, res) {
 app.get('/delete-order', (req, res) => {
   let options = {
     'method': 'DELETE',
-    'url': `http://localhost:3000/orders/${req.qeury.id}`,
+    'url': `http://localhost:3000/orders/${req.query.id}`,
     'headers': {
     }
   }
