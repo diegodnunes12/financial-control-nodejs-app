@@ -4,6 +4,8 @@ const hbs = require('hbs')
 const request = require('request')
 const bodyParser = require('body-parser');
 
+global.Intl = require('intl');
+
 
 const app = express()
 
@@ -40,12 +42,16 @@ app.get('', (req, res) => {
 
     orders.forEach(element => {
       let dateOrder = new Date(element.date)
-      element.date = formatDate(dateOrder)
+      //element.date = formatDate(dateOrder) 
+      element.date = formatLocateDate(dateOrder) 
+      
+      let valueOrder = parseFloat(element.value.$numberDecimal)
+      element.value.$numberDecimal = formatLocateCurrency(valueOrder)
       
       if(element.revenue){
-        income += parseFloat(element.value.$numberDecimal)
+        income += valueOrder
       }else{
-        outlay += parseFloat(element.value.$numberDecimal)
+        outlay += valueOrder
       }
     })
 
@@ -53,9 +59,9 @@ app.get('', (req, res) => {
 
     res.render('index', {
       orders: orders,
-      balance: balance,
-      income: income,
-      outlay: outlay
+      balance: formatLocateCurrency(balance),
+      income: formatLocateCurrency(income),
+      outlay: formatLocateCurrency(outlay)
     })
   })
   
@@ -170,18 +176,12 @@ app.get('/delete-category', (req, res) => {
   })  
 })
 
-
-function formatDate(date){
-  let day = twoDigitsFormat(date.getDate())
-  let month = twoDigitsFormat(date.getMonth() + 1)
-  let year = date.getFullYear()
-
-  return (`${day}/${month}/${year}`)  
+function formatLocateCurrency(valueOrder){
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valueOrder).replace(/^(\D+)/, '$1 ')    
 }
 
-// Exige que todos os dados da data e hora tenham dois digítos
-function twoDigitsFormat(date){
-  return ("0" + (date)).slice(-2)
+function formatLocateDate(dateOrder){
+  return new Intl.DateTimeFormat('pt-BR').format(dateOrder)
 }
 
 //const port = process.env.port || 3000
