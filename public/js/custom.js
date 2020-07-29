@@ -32,17 +32,11 @@ $('#newOrder').click( () => {
     $("#addOrder").modal()
 })
 
-// Alterando a borda do formulário de lançamentos
-$( "#revenue" ).change( () => {
-    if($('#revenue').find(":selected").val() == "true"){
-        $('#form-order').addClass( "revenue" )
-        $('#form-order').removeClass( "expense" )
-    }
-    else{
-        $('#form-order').removeClass( "revenue" )
-        $('#form-order').addClass( "expense" )
-    }
-})
+function editOrder(id, name){
+    $('input#name').val(name)
+    $('#editId').val(id)
+    $("#editOrder").modal()
+}
 
 function removeCategory(id, name){
     $('#categoryName').text(name)

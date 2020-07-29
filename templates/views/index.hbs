@@ -61,7 +61,7 @@
                                     <td class="pt-10">{{this.category_id}}</td>
                                     <td class="pt-10">{{this.value.$numberDecimal}}</td>
                                     <td>
-                                       <button class="btn btn-info" onclick="editCategory('{{this._id}}', '{{this.name}}')">
+                                       <button class="btn btn-info" onclick="editOrder('{{this._id}}', '{{this.name}}')">
                                             <img src="images/edit.svg">
                                         </button>
                                     </td>
@@ -91,6 +91,63 @@
         </button>
       </div>
       <form action="add-order" method="post"> 
+        <div class="modal-body">                           
+            <div class="form-group">
+                <label for="revenue">Tipo</label>
+                <select class="form-control" id="revenue" name="revenue">
+                    <option disabled selected></option>
+                    <option value="true">Entrada</option>
+                    <option value="false">Saída</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Data</label>
+                <input type="date" class="form-control" id="date" name="date">
+            </div>
+            <div class="form-group">
+                <label for="name">Descrição</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="value">Valor</label>
+                <input type="number" class="form-control" id="value" name="value">
+            </div>
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select class="form-control" id="category_id" name="category_id">
+                    <option disabled selected></option>
+                </select>
+            </div>
+            {{optionsCategories}}
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="settled" name="settled">
+                <label class="custom-control-label" for="settled">Lançamento pago</label>
+            </div>
+            <div class="form-group">
+                <label for="description">Observações</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{!-- Edit modal --}}
+<div class="modal fade" id="editOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="editOrderLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editOrderLabel">Editar Lançamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="update-order" method="post"> 
         <div class="modal-body">                           
             <div class="form-group">
                 <label for="revenue">Tipo</label>
