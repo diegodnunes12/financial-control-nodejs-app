@@ -78,7 +78,7 @@ app.post('/add-order', function (req, res) {
       'headers': {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue": + revenue,"settled": + settled,"category_id":"" + req.body.category_id + ""})
+      body: JSON.stringify({"date":"" + req.body.date + "","name":"" + req.body.name + "","description":"" + req.body.description + "","value":"" + req.body.value + "","revenue": + revenue,"settled": + settled,"category":"" + req.body.category_id + ""})
     }
     
     request(options, function (error, response) {

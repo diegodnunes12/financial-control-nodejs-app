@@ -2,9 +2,10 @@
 $('#newOrder').click( () => {
 
     let qtdOptions = $('#category_id option')
-
-    if(qtdOptions.length <= 1){
-
+    console.log('click')
+    console.log(qtdOptions)
+    if(qtdOptions.length <= 2){
+        console.log(qtdOptions.length)
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
@@ -18,11 +19,13 @@ $('#newOrder').click( () => {
                 let select = document.getElementById('category_id')
 
                 let categories = JSON.parse(result)
+                console.log(categories)
                 categories.forEach(category => {                
                     let option = document.createElement("option")
                     option.text = category.name
                     option.value = category._id
                     select.add(option)
+                    console.log(category)
                 })
             }
         )
