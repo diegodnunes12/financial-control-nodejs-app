@@ -19,7 +19,6 @@ $('#newOrder').click( () => {
                 let select = document.getElementById('category_id')
 
                 let categories = JSON.parse(result)
-                console.log(categories)
                 categories.forEach(category => {                
                     let option = document.createElement("option")
                     option.text = category.name

@@ -39,14 +39,18 @@ app.get('', (req, res) => {
     let income = 0
     let outlay = 0
     let balance = 0
-
+    
     orders.forEach(element => {
       let dateOrder = new Date(element.date)
       //element.date = formatDate(dateOrder) 
-      element.date = formatLocateDate(dateOrder) 
-      
+      element.date = formatLocateDate(dateOrder)       
       let valueOrder = parseFloat(element.value.$numberDecimal)
       element.value.$numberDecimal = formatLocateCurrency(valueOrder)
+
+      element.settledImage = "minus.svg"
+      if(element.settled){
+        element.settledImage = "check.svg"
+      }
       
       if(element.revenue){
         income += valueOrder
@@ -69,7 +73,7 @@ app.get('', (req, res) => {
 
 app.post('/add-order', function (req, res) {
 
-  let settled = (req.body.settled == 'true')
+  let settled = (req.body.settled == 'on')
   let revenue = (req.body.revenue == 'true')
     
   var options = {
