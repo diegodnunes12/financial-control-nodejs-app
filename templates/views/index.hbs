@@ -61,7 +61,7 @@
                                     <td class="pt-10">{{this.category.name}}</td>
                                     <td class="pt-10">{{this.value.$numberDecimal}}</td>
                                     <td>
-                                       <button class="btn btn-info" onclick="editOrder('{{this._id}}', '{{this.name}}')">
+                                       <button class="btn btn-info" onclick="editOrder('{{this._id}}', '{{this.name}}', {{this.date}}, {{this.category}}, {{this.value.$numberDecimal}})">
                                             <img src="images/edit.svg">
                                         </button>
                                     </td>

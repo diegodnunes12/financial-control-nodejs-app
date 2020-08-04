@@ -34,8 +34,10 @@ $('#newOrder').click( () => {
     $("#addOrder").modal()
 })
 
-function editOrder(id, name){
+function editOrder(id, name, date, category, value){
     $('input#name').val(name)
+    $('input#date').val(date)
+    $('input#value').val(value)
     $('#editId').val(id)
     $("#editOrder").modal()
 }
