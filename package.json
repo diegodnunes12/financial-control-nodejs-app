@@ -35,7 +35,7 @@
   "homepage": "https://github.com/diegodnunes12/financial-control-nodejs-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "hbs": "^4.1.1",
     "intl": "^1.2.5",
     "request": "^2.88.2"
